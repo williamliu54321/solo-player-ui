@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solo Player</title>
+    <title>FootSkill AI - Analysis</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
@@ -97,9 +97,9 @@
 
         .title {
             font-family: 'Orbitron', monospace;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             background: linear-gradient(180deg, #fff 0%, #5ecece 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -124,74 +124,74 @@
         }
 
         /* Rank Badge */
-        .rank-badge {
-            display: inline-block;
-            padding: 8px 30px;
-            border: 1px solid #5ecece;
-            border-radius: 20px;
-            font-family: 'Orbitron', monospace;
-            font-size: 14px;
-            letter-spacing: 3px;
-            color: #5ecece;
-            margin: 15px 0;
-            text-shadow: 0 0 10px rgba(94, 206, 206, 0.5);
+        .analysis-date {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 10px 0 5px;
         }
 
-        /* Level Section */
-        .level-section {
+        /* Overall Rating Section */
+        .rating-section {
             text-align: center;
             margin-bottom: 25px;
         }
 
-        .level-label {
+        .rating-label {
             font-size: 14px;
             letter-spacing: 3px;
             color: rgba(255, 255, 255, 0.6);
             margin-bottom: 5px;
         }
 
-        .level-number {
+        .rating-number {
             font-family: 'Orbitron', monospace;
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 900;
             color: #6b5bd2;
             text-shadow: 0 0 20px rgba(107, 91, 210, 0.5);
         }
 
-        /* Attributes Section */
-        .attributes-header {
+        .rating-max {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: -5px;
+        }
+
+        /* Skills Section */
+        .skills-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
         }
 
-        .attributes-title {
+        .skills-title {
             font-family: 'Orbitron', monospace;
             font-size: 16px;
             letter-spacing: 2px;
             color: #fff;
         }
 
-        .attributes-max {
+        .skills-subtitle {
             font-size: 12px;
             color: rgba(255, 255, 255, 0.5);
             margin-top: 4px;
         }
 
-        .add-btn {
+        .share-btn {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             border: 2px solid #6b5bd2;
             background: transparent;
             color: #6b5bd2;
-            font-size: 24px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .add-btn:hover {
+        .share-btn:hover {
             background: rgba(107, 91, 210, 0.2);
             box-shadow: 0 0 15px rgba(107, 91, 210, 0.5);
         }
@@ -213,12 +213,13 @@
             position: absolute;
             text-align: center;
             font-family: 'Orbitron', monospace;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 1px;
         }
 
         .stat-label .name {
             color: rgba(255, 255, 255, 0.8);
+            font-size: 9px;
         }
 
         .stat-label .value {
@@ -227,114 +228,101 @@
             font-weight: 700;
         }
 
-        .stat-strength { top: -5px; left: 50%; transform: translateX(-50%); }
-        .stat-intelligence { top: 22%; right: -10px; }
-        .stat-agility { bottom: 22%; right: -10px; }
-        .stat-perception { bottom: -5px; left: 50%; transform: translateX(-50%); }
-        .stat-endurance { bottom: 22%; left: -10px; }
-        .stat-focus { top: 22%; left: -10px; }
+        .stat-technique { top: -5px; left: 50%; transform: translateX(-50%); }
+        .stat-power { top: 22%; right: -15px; }
+        .stat-accuracy { bottom: 22%; right: -15px; }
+        .stat-control { bottom: -5px; left: 50%; transform: translateX(-50%); }
+        .stat-speed { bottom: 22%; left: -15px; }
+        .stat-balance { top: 22%; left: -15px; }
 
-        /* XP Section */
-        .xp-section {
+        /* Analysis Date */
+        .analysis-section {
             margin-bottom: 20px;
         }
 
-        .xp-header {
+        .analysis-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
 
-        .xp-label {
+        .analysis-label {
             font-family: 'Orbitron', monospace;
             font-size: 12px;
             letter-spacing: 2px;
             color: rgba(255, 255, 255, 0.6);
         }
 
-        .xp-percent {
+        .analysis-count {
             font-size: 14px;
             color: rgba(255, 255, 255, 0.6);
         }
 
-        .xp-value {
+        .analysis-value {
             font-family: 'Orbitron', monospace;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
             color: #fff;
             text-align: center;
             margin-bottom: 15px;
         }
 
-        .xp-bar {
+        .analysis-value span {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+        }
+
+        .progress-bar {
             height: 8px;
             background: rgba(50, 50, 80, 0.5);
             border-radius: 4px;
             overflow: hidden;
         }
 
-        .xp-fill {
+        .progress-fill {
             height: 100%;
-            width: 35%;
+            width: 72%;
             background: linear-gradient(90deg, #3a7bd5, #5ecece);
             border-radius: 4px;
             box-shadow: 0 0 10px rgba(94, 206, 206, 0.5);
         }
 
-        /* Next Rank */
-        .next-rank {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        /* Improvement Tips */
+        .tips-section {
+            margin-top: 20px;
             padding-top: 15px;
             border-top: 1px solid rgba(100, 80, 180, 0.2);
         }
 
-        .next-rank-label {
+        .tips-title {
             font-family: 'Orbitron', monospace;
             font-size: 12px;
             letter-spacing: 2px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 10px;
         }
 
-        .next-rank-value {
-            font-family: 'Orbitron', monospace;
-            font-size: 18px;
-            letter-spacing: 2px;
-            color: #6b5bd2;
-            text-shadow: 0 0 10px rgba(107, 91, 210, 0.5);
+        .tip-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(107, 91, 210, 0.1);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #6b5bd2;
         }
 
-        .rank-progress {
-            width: 100%;
-            margin-top: 10px;
+        .tip-icon {
+            font-size: 16px;
         }
 
-        .rank-bar {
-            height: 4px;
-            background: rgba(50, 50, 80, 0.5);
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .rank-dot {
-            position: absolute;
-            left: 5%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background: #3a7bd5;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #3a7bd5;
-        }
-
-        .level-needed {
-            text-align: center;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-top: 8px;
+        .tip-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         /* Settings Button */
@@ -370,7 +358,7 @@
                 <div class="diamond"></div>
                 <div class="header-line"></div>
             </div>
-            <h1 class="title">SOLO PLAYER</h1>
+            <h1 class="title">SKILL ANALYSIS</h1>
             <div class="header-bottom">
                 <div class="header-line"></div>
                 <div class="diamond-small"></div>
@@ -378,24 +366,29 @@
             </div>
         </div>
 
-        <!-- Rank Badge -->
-        <div style="text-align: center;">
-            <span class="rank-badge">E-RANK</span>
+        <!-- Analysis Date -->
+        <div class="analysis-date">Analyzed April 23, 2026</div>
+
+        <!-- Overall Rating -->
+        <div class="rating-section">
+            <div class="rating-label">OVERALL RATING</div>
+            <div class="rating-number">72</div>
+            <div class="rating-max">out of 100</div>
         </div>
 
-        <!-- Level -->
-        <div class="level-section">
-            <div class="level-label">LEVEL</div>
-            <div class="level-number">2</div>
-        </div>
-
-        <!-- Attributes -->
-        <div class="attributes-header">
+        <!-- Skills -->
+        <div class="skills-header">
             <div>
-                <div class="attributes-title">ATTRIBUTES</div>
-                <div class="attributes-max">MAX: 115 (Level 2)</div>
+                <div class="skills-title">SKILL BREAKDOWN</div>
+                <div class="skills-subtitle">Based on video analysis</div>
             </div>
-            <button class="add-btn">+</button>
+            <button class="share-btn" title="Share Results">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                    <polyline points="16 6 12 2 8 6"/>
+                    <line x1="12" y1="2" x2="12" y2="15"/>
+                </svg>
+            </button>
         </div>
 
         <!-- Radar Chart -->
@@ -418,9 +411,9 @@
                     <line x1="100" y1="100" x2="30" y2="57.5"/>
                 </g>
 
-                <!-- Data polygon -->
+                <!-- Data polygon - Technique:85, Power:65, Accuracy:78, Control:70, Speed:60, Balance:75 -->
                 <polygon
-                    points="100,25 120,82 125,115 100,145 55,115 60,82"
+                    points="100,27 148,72 145,130 100,138 48,120 45,70"
                     fill="rgba(107, 91, 210, 0.3)"
                     stroke="#6b5bd2"
                     stroke-width="2"
@@ -428,67 +421,68 @@
 
                 <!-- Data points -->
                 <g fill="#6b5bd2">
-                    <circle cx="100" cy="25" r="4"/>
-                    <circle cx="120" cy="82" r="4"/>
-                    <circle cx="125" cy="115" r="4"/>
-                    <circle cx="100" cy="145" r="4"/>
-                    <circle cx="55" cy="115" r="4"/>
-                    <circle cx="60" cy="82" r="4"/>
+                    <circle cx="100" cy="27" r="4"/>
+                    <circle cx="148" cy="72" r="4"/>
+                    <circle cx="145" cy="130" r="4"/>
+                    <circle cx="100" cy="138" r="4"/>
+                    <circle cx="48" cy="120" r="4"/>
+                    <circle cx="45" cy="70" r="4"/>
                 </g>
             </svg>
 
             <!-- Stat Labels -->
-            <div class="stat-label stat-strength">
-                <div class="name">STRENGTH</div>
-                <div class="value">88</div>
+            <div class="stat-label stat-technique">
+                <div class="name">TECHNIQUE</div>
+                <div class="value">85</div>
             </div>
-            <div class="stat-label stat-intelligence">
-                <div class="name">INTELLIGENCE</div>
-                <div class="value">30</div>
+            <div class="stat-label stat-power">
+                <div class="name">POWER</div>
+                <div class="value">65</div>
             </div>
-            <div class="stat-label stat-agility">
-                <div class="name">AGILITY</div>
-                <div class="value">40</div>
+            <div class="stat-label stat-accuracy">
+                <div class="name">ACCURACY</div>
+                <div class="value">78</div>
             </div>
-            <div class="stat-label stat-perception">
-                <div class="name">PERCEPTION</div>
-                <div class="value">10</div>
+            <div class="stat-label stat-control">
+                <div class="name">CONTROL</div>
+                <div class="value">70</div>
             </div>
-            <div class="stat-label stat-endurance">
-                <div class="name">ENDURANCE</div>
-                <div class="value">10</div>
+            <div class="stat-label stat-speed">
+                <div class="name">SPEED</div>
+                <div class="value">60</div>
             </div>
-            <div class="stat-label stat-focus">
-                <div class="name">FOCUS</div>
-                <div class="value">10</div>
-            </div>
-        </div>
-
-        <!-- XP Section -->
-        <div class="xp-section">
-            <div class="xp-header">
-                <span class="xp-label">EXPERIENCE POINTS</span>
-                <span class="xp-percent">35%</span>
-            </div>
-            <div class="xp-value">1,350</div>
-            <div class="xp-bar">
-                <div class="xp-fill"></div>
+            <div class="stat-label stat-balance">
+                <div class="name">BALANCE</div>
+                <div class="value">75</div>
             </div>
         </div>
 
-        <!-- Next Rank -->
-        <div class="next-rank">
-            <span class="next-rank-label">NEXT RANK</span>
-            <span class="next-rank-value">D-RANK</span>
-        </div>
-        <div class="rank-progress">
-            <div class="rank-bar">
-                <div class="rank-dot"></div>
+        <!-- Analysis Progress -->
+        <div class="analysis-section">
+            <div class="analysis-header">
+                <span class="analysis-label">SESSIONS ANALYZED</span>
+                <span class="analysis-count">12 clips</span>
             </div>
-            <div class="level-needed">Level 20 needed</div>
+            <div class="analysis-value">+8 <span>improvement this week</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
         </div>
 
-        <button class="settings-btn">⚙</button>
+        <!-- Improvement Tips -->
+        <div class="tips-section">
+            <div class="tips-title">FOCUS AREAS</div>
+            <div class="tip-item">
+                <span class="tip-icon">&#9889;</span>
+                <span class="tip-text">Increase shot power with hip rotation drills</span>
+            </div>
+            <div class="tip-item">
+                <span class="tip-icon">&#127939;</span>
+                <span class="tip-text">Work on quick footwork transitions</span>
+            </div>
+        </div>
+
+        <button class="settings-btn">&#9881;</button>
     </div>
 </body>
 </html>
